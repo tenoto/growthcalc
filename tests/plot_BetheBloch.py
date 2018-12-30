@@ -33,4 +33,22 @@ axes.set_xlabel('Energy (MeV)')
 axes.set_ylabel('Stopping Power (MeV cm$^2$/g)')
 axes.set_xscale('log')
 axes.set_yscale('log')
-plt.savefig('stopping_power.pdf')
+plt.savefig('stopping_power_nist_air_MeVcm2g-1.pdf')
+
+
+AIR_DENSITY = 1.293e-3 # g / cm3
+
+plt.clf()
+fig, axes = plt.subplots(1,1,figsize=(8,6))
+plt.plot(energy_MeV,AIR_DENSITY*interp_dEdx_total(energy_MeV),label='Total')
+plt.plot(energy_MeV,AIR_DENSITY*interp_dEdx_collision(energy_MeV),label='Collision')
+plt.plot(energy_MeV,AIR_DENSITY*interp_dEdx_radiative(energy_MeV),label='Radiative')
+plt.plot(energy_MeV,bethebloch_radiative(energy_MeV),label='Bethe-Bloch')
+axes.set_xlim(1e-3,1e+4)
+#axes.set_ylim(1,80)
+#axes.legend(loc='upper right')
+axes.set_xlabel('Energy (MeV)')
+axes.set_ylabel('Stopping Power (MeV / cm)')
+axes.set_xscale('log')
+axes.set_yscale('log')
+plt.savefig('stopping_power_nist_air_MeVcm-1.pdf')
